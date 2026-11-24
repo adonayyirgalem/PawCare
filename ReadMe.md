@@ -1,6 +1,6 @@
 # PawCare: Animal Rescue, Shelter Management, and Adoption System
 
-## About the Projectse
+## About the Project
 Animal rescue organizations play an important role in protecting abandoned, stray, and neglected animals. However, managing rescued animals, maintaining medical records, coordinating volunteers, and processing adoption applications can become challenging when information is handled manually or through disconnected records. These challenges can result in disorganized information, delays in adoption procedures, and difficulties monitoring the health and welfare of rescued animals.
 
 To address these challenges, our group proposes developing **PawCare**, an Animal Rescue, Shelter Management, and Adoption System. The system provides a centralized platform for animal shelters to manage rescued animals, maintain medical records, organize adoption procedures, and coordinate shelter activities. The application is developed using Java and applies object-oriented programming (OOP) principles to create a structured, maintainable, and functional system.
