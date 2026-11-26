@@ -1,76 +1,35 @@
 
-public abstract class Animal {
+import java.util.ArrayList;
 
-    // Private fields for encapsulation
-    private int id;
+public class Animal {
+
     private String name;
-    private int age;
-    private String breed;
-    private String healthStatus;
 
-    // Constructor
-    public Animal(int id, String name, int age,
-                  String breed, String healthStatus) {
+    
+    private ArrayList<MedicalRecord> medicalRecords;
 
-        this.id = id;
+    public Animal(String name) {
         this.name = name;
-        this.age = age;
-        this.breed = breed;
-        this.healthStatus = healthStatus;
+        medicalRecords = new ArrayList<>();
     }
 
-    // Getters and Setters
-    public int getId() {
-        return id;
+    
+    public void addMedicalRecord(MedicalRecord record) {
+        medicalRecords.add(record);
+        System.out.println("Medical record added successfully!");
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void viewMedicalHistory() {
+
+        System.out.println("Medical History of " + name);
+
+        if (medicalRecords.isEmpty()) {
+            System.out.println("No medical records available.");
+        } else {
+            for (MedicalRecord record : medicalRecords) {
+                System.out.println("--------------------");
+                System.out.println(record);
+            }
+        }
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getBreed() {
-        return breed;
-    }
-
-    public void setBreed(String breed) {
-        this.breed = breed;
-    }
-
-    public String getHealthStatus() {
-        return healthStatus;
-    }
-
-    public void setHealthStatus(String healthStatus) {
-        this.healthStatus = healthStatus;
-    }
-
-    // Shared method
-    public void displayInfo() {
-        System.out.println("ID: " + id);
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
-        System.out.println("Breed: " + breed);
-        System.out.println("Health Status: " + healthStatus);
-    }
-
-    // Abstract methods
-    public abstract void makeSound();
-
-    public abstract void eat();
 }
