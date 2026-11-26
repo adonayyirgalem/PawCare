@@ -8,6 +8,7 @@ public class AnimalRegistry {
     private String rescueLocation;
     private String healthStatus;
 
+    // constructor with the given parameters
     public AnimalRegistry(String id, String name, String species,
                             String breed, int age, String gender,
                             String rescueLocation, String healthStatus) {
@@ -21,6 +22,7 @@ public class AnimalRegistry {
         this.healthStatus = healthStatus;
     }
 
+    // getters and setters for all the fields
     public String getId() {
         return id;
     }
