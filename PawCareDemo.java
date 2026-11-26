@@ -1,5 +1,4 @@
-public class PawCareDemo {
-    import java.util.*;
+import java.util.*;
 
 public class PawCareDemo {
     public static void main(String[] args) {
@@ -63,4 +62,3 @@ public class PawCareDemo {
         }
     }
 }
-
