@@ -1,64 +1,53 @@
-import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PawCareDemo {
     public static void main(String[] args) {
-        List<Animal> animals = new ArrayList<>();
-        Map<String, List<String>> medicalRecords = new HashMap<>();
-        List<String> adoptions = new ArrayList<>();
+        AnimalRegistry registry = new AnimalRegistry();
+        List<AdoptionApplication> applications = new ArrayList<>();
 
-        // 1. Create sample animals
-        Animal rex = new Animal("A1", "Rex", "Dog", true);
-        Animal mimi = new Animal("A2", "Mimi", "Cat", true);
-        animals.add(rex);
-        animals.add(mimi);
+        Dog rex = new Dog(101, "Rex", 3, "German Shepherd", "Healthy", true, true);
+        Cat mimi = new Cat(102, "Mimi", 2, "Persian", "Healthy", true, true);
 
-        System.out.println("--- Animals ---");
-        for (Animal a : animals) {
-            System.out.println(a);
+        registry.registerAnimal(rex);
+        registry.registerAnimal(mimi);
+
+        System.out.println("--- Registered Animals ---");
+        for (Animal animal : registry.getAllAnimals()) {
+            animal.displayInfo();
+            animal.makeSound();
+            animal.eat();
+            if (animal instanceof Adoptable) {
+                ((Adoptable) animal).displayAdoptionStatus();
+            }
         }
 
-        // 2. Add medical records
-        medicalRecords.put("A1", new ArrayList<>(List.of("Rabies vaccine - Healthy")));
-        medicalRecords.put("A2", new ArrayList<>(List.of("Ear checkup - Treated")));
+        rex.addMedicalRecord(new MedicalRecord(
+                "Rabies", "Routine checkup", "Vaccinated", LocalDate.now()
+        ));
+        mimi.addMedicalRecord(new MedicalRecord(
+                "FVRCP", "Mild ear irritation", "Ear drops", LocalDate.now()
+        ));
 
-        System.out.println("\n--- Medical Records ---");
-        for (String id : medicalRecords.keySet()) {
-            System.out.println(id + ": " + medicalRecords.get(id));
-        }
+        System.out.println("\n--- Medical Histories ---");
+        rex.viewMedicalHistory();
+        mimi.viewMedicalHistory();
 
-        // 3. Process adoption application
-        String applicant = "Selam";
-        if (rex.available) {
-            rex.available = false;
-            adoptions.add("Approved: " + applicant + " adopted " + rex.name);
+        Adopter selam = new Adopter("AD-1", "Selam Kebede", "selam@example.com", "0911000000", "Addis Ababa");
+        AdoptionApplication app = new AdoptionApplication("APP-1", selam, rex);
+        applications.add(app);
+
+        if (rex.isAvailableForAdoption()) {
+            app.setStatus(AdoptionApplication.Status.APPROVED);
+            rex.setAvailableForAdoption(false);
         } else {
-            adoptions.add("Rejected: " + rex.name + " not available");
+            app.setStatus(AdoptionApplication.Status.REJECTED);
         }
 
-        System.out.println("\n--- Adoption Results ---");
-        for (String result : adoptions) {
-            System.out.println(result);
-        }
-
-        System.out.println("\n--- Updated Animals ---");
-        for (Animal a : animals) {
-            System.out.println(a);
-        }
-    }
-
-    static class Animal {
-        String id, name, type;
-        boolean available;
-
-        Animal(String id, String name, String type, boolean available) {
-            this.id = id;
-            this.name = name;
-            this.type = type;
-            this.available = available;
-        }
-
-        public String toString() {
-            return id + " | " + name + " (" + type + ") | Available: " + available;
-        }
+        System.out.println("\n--- Adoption Status ---");
+        System.out.println("Application " + app.getApplicationId() + " for " +
+                           app.getAnimal().getName() + " -> " + app.getStatus());
+        rex.displayAdoptionStatus();
     }
 }
