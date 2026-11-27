@@ -4,8 +4,6 @@ import java.util.ArrayList;
 public class Animal {
 
     private String name;
-
-    
     private ArrayList<MedicalRecord> medicalRecords;
 
     public Animal(String name) {
@@ -13,7 +11,6 @@ public class Animal {
         medicalRecords = new ArrayList<>();
     }
 
-    
     public void addMedicalRecord(MedicalRecord record) {
         medicalRecords.add(record);
         System.out.println("Medical record added successfully!");
@@ -31,5 +28,15 @@ public class Animal {
                 System.out.println(record);
             }
         }
+    }
+
+    
+    public MedicalRecord getLatestMedicalRecord() {
+
+        if (medicalRecords.isEmpty()) {
+            return null;
+        }
+
+        return medicalRecords.get(medicalRecords.size() - 1);
     }
 }
