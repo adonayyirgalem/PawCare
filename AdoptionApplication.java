@@ -23,6 +23,7 @@ public class AdoptionApplication {
         this.status = Status.PENDING;
     }
 
+    // Getters
     public String getApplicationId() {
         return applicationId;
     }
@@ -43,7 +44,57 @@ public class AdoptionApplication {
         return status;
     }
 
+    // Setter
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    // Approve adoption application
+    public void approveApplication(AdoptionApplication app) {
+
+        if (app == null ||
+            app.getStatus() != Status.PENDING) {
+            return;
+        }
+
+        if (app.getAnimal() instanceof Adoptable) {
+
+            Adoptable adoptableAnimal =
+                    (Adoptable) app.getAnimal();
+
+            adoptableAnimal.setAvailableForAdoption(false);
+
+            app.setStatus(Status.APPROVED);
+
+            System.out.println("Application approved successfully.");
+
+        } else {
+            System.out.println(
+                "Animal does not implement Adoptable interface."
+            );
+        }
+    }
+
+    // Reject adoption application
+    public void rejectApplication(AdoptionApplication app) {
+
+        if (app == null ||
+            app.getStatus() != Status.PENDING) {
+            return;
+        }
+
+        app.setStatus(Status.REJECTED);
+
+        System.out.println("Application rejected successfully.");
+    }
+
+    // Display application information
+    @Override
+    public String toString() {
+        return "Application ID: " + applicationId +
+               "\nAdopter: " + adopter.getName() +
+               "\nAnimal: " + animal.getName() +
+               "\nApplication Date: " + applicationDate +
+               "\nStatus: " + status;
     }
 }
