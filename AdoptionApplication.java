@@ -23,7 +23,7 @@ public class AdoptionApplication {
         this.status = Status.PENDING;
     }
 
-    // Getters
+    
     public String getApplicationId() {
         return applicationId;
     }
@@ -44,12 +44,12 @@ public class AdoptionApplication {
         return status;
     }
 
-    // Setter
+    
     public void setStatus(Status status) {
         this.status = status;
     }
 
-    // Approve adoption application
+    
     public void approveApplication(AdoptionApplication app) {
 
         if (app == null ||
@@ -75,7 +75,7 @@ public class AdoptionApplication {
         }
     }
 
-    // Reject adoption application
+    
     public void rejectApplication(AdoptionApplication app) {
 
         if (app == null ||
@@ -88,7 +88,7 @@ public class AdoptionApplication {
         System.out.println("Application rejected successfully.");
     }
 
-    // Display application information
+    
     @Override
     public String toString() {
         return "Application ID: " + applicationId +
