@@ -16,7 +16,7 @@ public class Adopter {
         this.address = address;
     }
 
-    // Getters
+    
     public String getAdopterId() {
         return adopterId;
     }
@@ -37,7 +37,6 @@ public class Adopter {
         return address;
     }
 
-    // Setters
     public void setName(String name) {
         this.name = name;
     }
@@ -54,7 +53,7 @@ public class Adopter {
         this.address = address;
     }
 
-    // Display adopter information
+    
     @Override
     public String toString() {
         return "Adopter ID: " + adopterId +
