@@ -42,12 +42,22 @@ public abstract class Animal {
     }
 
     public void addMedicalRecord(MedicalRecord record) {
+        if (record == null) {
+            throw new IllegalArgumentException("Medical record cannot be null.");
+        }
         medicalRecords.add(record);
         System.out.println("Medical record added successfully!");
     }
 
     public ArrayList<MedicalRecord> getMedicalRecords() {
         return medicalRecords;
+    }
+
+    public MedicalRecord getLatestMedicalRecord() {
+        if (medicalRecords.isEmpty()) {
+            return null;
+        }
+        return medicalRecords.get(medicalRecords.size() - 1);
     }
 
     public void viewMedicalHistory() {

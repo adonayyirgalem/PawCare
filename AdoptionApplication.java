@@ -1,4 +1,3 @@
-
 import java.time.LocalDate;
 
 public class AdoptionApplication {
@@ -23,7 +22,6 @@ public class AdoptionApplication {
         this.status = Status.PENDING;
     }
 
-    
     public String getApplicationId() {
         return applicationId;
     }
@@ -44,51 +42,41 @@ public class AdoptionApplication {
         return status;
     }
 
-    
     public void setStatus(Status status) {
         this.status = status;
     }
 
-    
-    public void approveApplication(AdoptionApplication app) {
-
-        if (app == null ||
-            app.getStatus() != Status.PENDING) {
+    public void approveApplication() {
+        if (this.status != Status.PENDING) {
+            System.out.println("Application " + applicationId + " is already " + status + ".");
             return;
         }
 
-        if (app.getAnimal() instanceof Adoptable) {
-
-            Adoptable adoptableAnimal =
-                    (Adoptable) app.getAnimal();
-
+        if (animal instanceof Adoptable) {
+            Adoptable adoptableAnimal = (Adoptable) animal;
+            if (!adoptableAnimal.isAvailableForAdoption()) {
+                this.status = Status.REJECTED;
+                System.out.println("Application " + applicationId + " rejected: " +
+                                   animal.getName() + " is not available for adoption.");
+                return;
+            }
             adoptableAnimal.setAvailableForAdoption(false);
-
-            app.setStatus(Status.APPROVED);
-
-            System.out.println("Application approved successfully.");
-
+            this.status = Status.APPROVED;
+            System.out.println("Application " + applicationId + " approved successfully.");
         } else {
-            System.out.println(
-                "Animal does not implement Adoptable interface."
-            );
+            System.out.println("Animal does not implement Adoptable interface.");
         }
     }
 
-    
-    public void rejectApplication(AdoptionApplication app) {
-
-        if (app == null ||
-            app.getStatus() != Status.PENDING) {
+    public void rejectApplication() {
+        if (this.status != Status.PENDING) {
+            System.out.println("Application " + applicationId + " is already " + status + ".");
             return;
         }
-
-        app.setStatus(Status.REJECTED);
-
-        System.out.println("Application rejected successfully.");
+        this.status = Status.REJECTED;
+        System.out.println("Application " + applicationId + " rejected successfully.");
     }
 
-    
     @Override
     public String toString() {
         return "Application ID: " + applicationId +
