@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,4 +33,33 @@ public class AnimalRegistry {
         }
         return animalList.remove(removed);
     }
+
+    public List<Animal> findByName(String name) {
+        List<Animal> matchingAnimals = new ArrayList<>();
+
+        for (Animal animal : animalList) {
+            if (animal.getName().equalsIgnoreCase(name)) {
+                matchingAnimals.add(animal);
+            }
+        }
+
+        return matchingAnimals;
+    }
+
+    public int countByAvailability(boolean available) {
+        int count = 0;
+
+        for (Animal animal : animalList) {
+            if (animal instanceof Adoptable) {
+                Adoptable adoptableAnimal = (Adoptable) animal;
+
+                if (adoptableAnimal.isAvailableForAdoption() == available) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+    
 }
